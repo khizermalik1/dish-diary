@@ -1,0 +1,5 @@
+<h2>Post a New Recipe</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="btn btn-danger">Submit</button>
+</form>
