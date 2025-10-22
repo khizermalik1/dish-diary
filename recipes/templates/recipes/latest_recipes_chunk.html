@@ -1,0 +1,9 @@
+{% for recipe in recipes %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5>{{ recipe.title }}</h5>
+      <p>{{ recipe.summary|truncatewords:20 }}</p>
+      <a href="{% url 'recipes:recipe_detail' slug=recipe.slug %}" class="btn btn-sm btn-outline-primary">View</a>
+    </div>
+  </div>
+{% endfor %}

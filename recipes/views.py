@@ -5,6 +5,10 @@ from django.views import generic
 from django.http import HttpResponseForbidden
 from .models import Recipe
 from .forms import RecipeForm
+from django.db.models import Count
+from .models import Recipe, Comment, Like
+
+
 
 
 class RecipeListView(generic.ListView):
@@ -13,7 +17,12 @@ class RecipeListView(generic.ListView):
     context_object_name = 'recipes'
     queryset = Recipe.objects.order_by('-created_at')
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['popular_recipes'] = Recipe.objects.annotate(
+            like_count=Count('likes')
+        ).order_by('-like_count')[:4]
+        return context 
 class RecipeDetailView(generic.DetailView):
     model = Recipe
     template_name = 'recipes/recipe_detail.html'
@@ -65,3 +74,28 @@ def delete_recipe(request, slug):
         recipe.delete()
         return redirect('recipes:home')
     return HttpResponseForbidden("You can't delete this recipe.")
+
+
+@login_required
+def comment_recipe(request, slug):
+    recipe = get_object_or_404(Recipe, slug=slug)
+    if request.method == 'POST':
+        Comment.objects.create(
+            recipe=recipe,
+            author=request.user,
+            body=request.POST.get('body')
+        )
+    return redirect('recipes:recipe_detail', slug=slug)
+
+
+@login_required
+def like_recipe(request, slug):
+    recipe = get_object_or_404(Recipe, slug=slug)
+    Like.objects.get_or_create(recipe=recipe, user=request.user)
+    return redirect('recipes:recipe_detail', slug=slug)
+
+
+def latest_recipes(request):
+    page = int(request.GET.get('page', 1))
+    recipes = Recipe.objects.order_by('-created_at')[(page-1)*10:page*10]
+    return render(request, 'recipes/latest_recipes_chunk.html', {'recipes': recipes})
