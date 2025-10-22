@@ -11,7 +11,7 @@ class RecipeListView(generic.ListView):
     model = Recipe
     template_name = 'recipes/home.html'
     context_object_name = 'recipes'
-    queryset = Recipe.objects.filter(is_published=True).order_by('-created_at')
+    queryset = Recipe.objects.order_by('-created_at')
 
 
 class RecipeDetailView(generic.DetailView):
