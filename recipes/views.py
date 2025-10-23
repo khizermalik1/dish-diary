@@ -14,11 +14,15 @@ class RecipeListView(generic.ListView):
     model = Recipe
     template_name = 'recipes/home.html'
     context_object_name = 'recipes'
-    queryset = Recipe.objects.order_by('-created_at')
+    queryset = Recipe.objects.annotate(
+        comment_count=Count('comments'),
+        like_count=Count('likes')
+    ).order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['popular_recipes'] = Recipe.objects.annotate(
+            comment_count=Count('comments'),
             like_count=Count('likes')
         ).order_by('-like_count')[:4]
         return context
@@ -103,5 +107,8 @@ def like_recipe(request, slug):
 
 def latest_recipes(request):
     page = int(request.GET.get('page', 1))
-    recipes = Recipe.objects.order_by('-created_at')[(page-1)*10:page*10]
+    recipes = Recipe.objects.annotate(
+        comment_count=Count('comments'),
+        like_count=Count('likes')
+    ).order_by('-created_at')[(page-1)*10:page*10]
     return render(request, 'recipes/latest_recipes_chunk.html', {'recipes': recipes})

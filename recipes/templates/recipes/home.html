@@ -125,6 +125,10 @@
                 <div>
                   <h5 class="card-title">{{ recipe.title }}</h5>
                   <p class="card-text">{{ recipe.summary|truncatewords:20 }}</p>
+                  <p class="text-muted small mt-2">
+                    ❤️ {{ recipe.like_count }} like{{ recipe.like_count|pluralize }},
+                    💬 {{ recipe.comment_count }} comment{{ recipe.comment_count|pluralize }}
+                  </p>
                 </div>
                 <a href="{% url 'recipes:recipe_detail' slug=recipe.slug %}" class="btn btn-outline-danger mt-3">View Recipe</a>
               </div>
@@ -148,6 +152,10 @@
                 <div>
                   <h5 class="card-title">{{ recipe.title }}</h5>
                   <p class="card-text">{{ recipe.summary|truncatewords:20 }}</p>
+                  <p class="text-muted small mt-2">
+                    ❤️ {{ recipe.like_count }} like{{ recipe.like_count|pluralize }},
+                    💬 {{ recipe.comment_count }} comment{{ recipe.comment_count|pluralize }}
+                  </p>
                 </div>
                 <a href="{% url 'recipes:recipe_detail' slug=recipe.slug %}" class="btn btn-outline-danger mt-3">View Recipe</a>
                 {% if user.is_authenticated and recipe.author == user or user.is_superuser %}
