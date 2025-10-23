@@ -14,12 +14,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Environment-driven settings for Heroku
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-local')
+
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.environ.get(
     'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
 print("DEBUG:", DEBUG)
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
-
 
 # Heroku / proxy SSL header
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -66,14 +67,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database: default to local sqlite, but honor DATABASE_URL from Heroku
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        ssl_require=not DEBUG,
-    )
-}
+# ✅ Use SQLite locally, PostgreSQL on Heroku
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
