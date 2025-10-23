@@ -1,3 +1,5 @@
+from .models import Recipe, Favourite
+from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
@@ -163,3 +165,20 @@ def edit_profile(request):
 def explore_chefs(request):
     users = User.objects.all().order_by('username')
     return render(request, 'recipes/explore_chefs.html', {'users': users})
+
+
+@login_required
+def toggle_favourite(request, slug):
+    recipe = get_object_or_404(Recipe, slug=slug)
+    fav, created = Favourite.objects.get_or_create(
+        user=request.user, recipe=recipe)
+    if not created:
+        fav.delete()
+    return redirect('recipes:recipe_detail', slug=slug)
+
+
+@login_required
+def saved_recipes(request):
+    saved = Favourite.objects.filter(
+        user=request.user).select_related('recipe')
+    return render(request, 'recipes/saved_recipes.html', {'saved': saved})

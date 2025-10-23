@@ -9,6 +9,10 @@
       <ul class="navbar-nav d-flex align-items-center gap-3">
            <a class="nav-link" href="{% url 'recipes:explore_chefs' %}">Explore Chefs</a>
         {% if user.is_authenticated %}
+        <li class="nav-item">
+  <a class="nav-link" href="{% url 'recipes:saved_recipes' %}">Saved Recipes</a>
+</li>
+
           <li class="nav-item">
             <a class="nav-link" href="{% url 'recipes:user_profile' username=user.username %}">Your Profile</a>
           </li>

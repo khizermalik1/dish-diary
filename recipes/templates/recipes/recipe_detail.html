@@ -45,24 +45,42 @@
       .btn-danger:hover {
         background-color: #a84300;
       }
+
+      .alert-success {
+  background-color: #d35400;
+  color: white;
+  border: none;
+}
+
     </style>
   </head>
   <body>
-    <!-- Navbar -->
-   {% include 'recipes/navbar.html' %}
 
-    <!-- Recipe Detail -->
+
+
+    {% include 'recipes/navbar.html' %}
+
+    {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
     <div class="container py-5">
       <div class="recipe-card mx-auto" style="max-width: 800px">
         <h1>{{ recipe.title }}</h1>
-       <p>
-  <strong>By:</strong>
-  <a href="{% url 'recipes:user_profile' username=recipe.author.username %}" class="text-decoration-none text-danger fw-bold">
-    {{ recipe.author.username }}
-  </a>
-  • {{ recipe.created_at|date:"F j, Y" }}
-</p>
-
+        <p>
+          <strong>By:</strong>
+          <a href="{% url 'recipes:user_profile' username=recipe.author.username %}" class="text-decoration-none text-danger fw-bold">
+            {{ recipe.author.username }}
+          </a>
+          • {{ recipe.created_at|date:"F j, Y" }}
+        </p>
 
         <h4>Summary</h4>
         <p>{{ recipe.summary }}</p>
@@ -85,77 +103,70 @@
           {% endfor %}
         </ol>
 
-        <!-- prettier-ignore-start -->
-        {% if user.is_authenticated %} {% if recipe.author == user or user.is_superuser %}
-        <div class="mt-4 d-flex justify-content-end gap-2">
-          <a
-            href="{% url 'recipes:edit_recipe' slug=recipe.slug %}"
-            class="btn btn-outline-secondary"
-            >Edit</a
-          >
-          <a
-            href="{% url 'recipes:delete_recipe' slug=recipe.slug %}"
-            class="btn btn-outline-danger"
-            >Delete</a
-          >
-        </div>
-        {% endif %} {% endif %}
-        
-      </div>
-    </div>
-<!-- 💬 Comments & ❤️ Likes Card -->
- <form method="post" action="{% url 'recipes:toggle_favourite' slug=recipe.slug %}">
-  {% csrf_token %}
-  <button type="submit" class="btn btn-outline-warning btn-sm">
-    💾 Save
-  </button>
-</form>
+        {% if user.is_authenticated %}
+          {% if recipe.author == user or user.is_superuser %}
+          <div class="mt-4 d-flex justify-content-end gap-2">
+            <a href="{% url 'recipes:edit_recipe' slug=recipe.slug %}" class="btn btn-outline-secondary">Edit</a>
+            <a href="{% url 'recipes:delete_recipe' slug=recipe.slug %}" class="btn btn-outline-danger">Delete</a>
+          </div>
+          {% endif %}
+        {% endif %}
 
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card shadow-sm border-0" style="background-color: #fff0e6;">
-        <div class="card-body">
-          <h5 class="card-title text-center mb-4">💬 Comments & ❤️ Likes</h5>
-
-          <!-- Like Button -->
-          <form method="post" action="{% url 'recipes:like_recipe' slug=recipe.slug %}" class="text-center mb-4">
+        <!-- Like + Save Buttons -->
+        <div class="mt-4 d-flex justify-content-center gap-2">
+          <form method="post" action="{% url 'recipes:like_recipe' slug=recipe.slug %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-outline-danger btn-sm">
               ❤️ Like ({{ recipe.likes.count }})
             </button>
           </form>
 
-          <!-- Comments List -->
-          <h6 class="mb-3">Comments</h6>
-          <div style="max-height: 200px; overflow-y: auto;">
-            <ul class="list-group list-group-flush">
-              {% for comment in recipe.comments.all %}
-                <li class="list-group-item" style="background-color: #fff0e6;">
-                  <strong>{{ comment.author }}</strong>: {{ comment.body }}
-                </li>
-              {% empty %}
-                <li class="list-group-item text-muted text-center" style="background-color: #fff0e6;">
-                  No comments yet.
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-
-          <!-- Add Comment Form -->
-          <form method="post" action="{% url 'recipes:comment_recipe' slug=recipe.slug %}" class="mt-4">
+          <form method="post" action="{% url 'recipes:toggle_favourite' slug=recipe.slug %}">
             {% csrf_token %}
-            <div class="mb-3">
-              <textarea name="body" class="form-control form-control-sm" rows="2" placeholder="Add a comment..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-outline-primary btn-sm w-100">Submit Comment</button>
+            <button type="submit" class="btn btn-outline-warning btn-sm">
+              💾 Save
+            </button>
           </form>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
+    <div class="container mt-4">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow-sm border-0" style="background-color: #fff0e6;">
+            <div class="card-body">
+              <h5 class="card-title text-center mb-4">💬 Comments & ❤️ Likes</h5>
+
+              <h6 class="mb-3">Comments</h6>
+              <div style="max-height: 200px; overflow-y: auto;">
+                <ul class="list-group list-group-flush">
+                  {% for comment in recipe.comments.all %}
+                  <li class="list-group-item" style="background-color: #fff0e6;">
+                    <strong>{{ comment.author }}</strong>: {{ comment.body }}
+                  </li>
+                  {% empty %}
+                  <li class="list-group-item text-muted text-center" style="background-color: #fff0e6;">
+                    No comments yet.
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+              <form method="post" action="{% url 'recipes:comment_recipe' slug=recipe.slug %}" class="mt-4">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <textarea name="body" class="form-control form-control-sm" rows="2" placeholder="Add a comment..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-sm w-100" style="background-color: #d35400; color: white;">
+                  Submit Comment
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
