@@ -49,67 +49,20 @@
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg shadow-sm">
-      <div class="container">
-        <a class="navbar-brand" href="/">DishDiary</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <form
-                method="post"
-                action="{% url 'logout' %}"
-                style="display: inline"
-              >
-                {% csrf_token %}
-                <button
-                  type="submit"
-                  class="nav-link btn btn-link"
-                  style="padding: 0; border: none"
-                >
-                  Logout
-                </button>
-              </form>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    {% if messages %}
-  <div class="container mt-3">
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" style="background-color: #fff0e6; border: none;">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
+   {% include 'recipes/navbar.html' %}
 
     <!-- Recipe Detail -->
     <div class="container py-5">
       <div class="recipe-card mx-auto" style="max-width: 800px">
         <h1>{{ recipe.title }}</h1>
-        <p>
-          <strong>By:</strong> {{ recipe.author }} • {{recipe.created_at|date:"F j, Y" }}
-        </p>
+       <p>
+  <strong>By:</strong>
+  <a href="{% url 'recipes:user_profile' username=recipe.author.username %}" class="text-decoration-none text-danger fw-bold">
+    {{ recipe.author.username }}
+  </a>
+  • {{ recipe.created_at|date:"F j, Y" }}
+</p>
+
 
         <h4>Summary</h4>
         <p>{{ recipe.summary }}</p>
@@ -151,6 +104,13 @@
       </div>
     </div>
 <!-- 💬 Comments & ❤️ Likes Card -->
+ <form method="post" action="{% url 'recipes:toggle_favourite' slug=recipe.slug %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-outline-warning btn-sm">
+    💾 Save
+  </button>
+</form>
+
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-md-8">

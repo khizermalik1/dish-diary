@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm
@@ -8,6 +9,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from .models import Recipe, Comment, Like
 from .forms import RecipeForm
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import ProfileForm
+from .models import Profile
 
 
 class RecipeListView(generic.ListView):
@@ -112,3 +118,48 @@ def latest_recipes(request):
         like_count=Count('likes')
     ).order_by('-created_at')[(page-1)*10:page*10]
     return render(request, 'recipes/latest_recipes_chunk.html', {'recipes': recipes})
+
+
+def search_recipes(request):
+    query = request.GET.get('q', '')
+    results = Recipe.objects.annotate(
+        comment_count=Count('comments'),
+        like_count=Count('likes')
+    ).filter(
+        Q(title__icontains=query) |
+        Q(summary__icontains=query) |
+        Q(ingredients__icontains=query) |
+        Q(author__username__icontains=query)
+    ).order_by('-created_at')
+    return render(request, 'recipes/search_results.html', {'query': query, 'results': results})
+
+
+def user_profile(request, username):
+    user_obj = get_object_or_404(User, username=username)
+    recipes = Recipe.objects.filter(author=user_obj).annotate(
+        comment_count=Count('comments'),
+        like_count=Count('likes')
+    ).order_by('-created_at')
+    return render(request, 'recipes/user_profile.html', {
+        'profile_user': user_obj,
+        'recipes': recipes
+    })
+
+
+@login_required
+def edit_profile(request):
+    # Ensure profile exists
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    form = ProfileForm(request.POST or None,
+                       request.FILES or None, instance=profile)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        messages.success(request, "📝 Profile updated successfully!")
+        return redirect('recipes:user_profile', username=request.user.username)
+    return render(request, 'recipes/edit_profile.html', {'form': form})
+
+
+def explore_chefs(request):
+    users = User.objects.all().order_by('username')
+    return render(request, 'recipes/explore_chefs.html', {'users': users})
