@@ -9,11 +9,7 @@ import sys
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import dj_database_url
-env_path = os.path.join(os.path.dirname(__file__), '..', 'env.py')
-if os.path.exists(env_path):
-    sys.path.append(os.path.dirname(env_path))
-    import env
-
+ 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
