@@ -10,8 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get(
     'SECRET_KEY', 'django-insecure-4z@1!x7^g$8n#k3&b!9r2@+m%qv$1=5z@u3z@6z@v8z@3z@x9z')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = os.environ.get(
-    'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = ['dish-diary.herokuapp.com']
+
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
