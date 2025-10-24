@@ -17,15 +17,15 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-local')
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.environ.get(
-    'ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-
-print("DEBUG:", DEBUG)
-print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
+    'ALLOWED_HOSTS',
+    'dish-diary-c42493ea6a5d.herokuapp.com,localhost,127.0.0.1'
+).split(',')
 
 # Heroku / proxy SSL header
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Application definition
+# Application definitionfrom django.core.management.utils import get_random_secret_key
+print(get_random_secret_key())
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,11 +70,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://postgres:23.Howard@localhost:5432/dish_diary',
-        conn_max_age=600
+        default=os.environ.get(
+            'DATABASE_URL', 'postgres://postgres:23.Howard@localhost:5432/dish_diary'),
+        conn_max_age=600,
+        ssl_require=not os.environ.get(
+            'DEBUG', 'False') == 'True'  # use SSL on Heroku
     )
 }
-
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
