@@ -18,7 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['SECRET_KEY']
 
 
-ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+
 
 
 # Heroku / proxy SSL header
