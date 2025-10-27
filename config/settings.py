@@ -1,5 +1,4 @@
 import os
-import sys
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import dj_database_url
@@ -7,10 +6,10 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Environment-driven settings for Heroku and local fallback
-SECRET_KEY = os.environ.get(
-    'SECRET_KEY', 'django-insecure-4z@1!x7^g$8n#k3&b!9r2@+m%qv$1=5z@u3z@6z@v8z@3z@x9z')
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ['*']
+
+
+ALLOWED_HOSTS = ['dish-diary-6fb544588f18.herokuapp.com']
+
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -57,12 +56,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get(
-            'DATABASE_URL', 'postgres://postgres:23.Howard@localhost:5432/dish_diary'),
-        conn_max_age=600,
-        ssl_require=not DEBUG
-    )
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
 
 AUTH_PASSWORD_VALIDATORS = [
