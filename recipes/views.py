@@ -77,8 +77,7 @@ def edit_recipe(request, slug):
     if request.method == 'POST' and form.is_valid():
         form.save()
         messages.success(request, "✏️ Recipe updated successfully!")
-        return redirect('recipes:home')
-
+        return redirect('recipes:recipe_detail', slug=recipe.slug)
     return render(request, 'recipes/edit_recipe.html', {'form': form})
 
 
