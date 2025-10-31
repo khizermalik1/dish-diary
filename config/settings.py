@@ -17,8 +17,8 @@ ALLOWED_HOSTS = [
 ]
 
 
-SECRET_KEY = '&7k4@1(-b4433s!n%pf9wzg9r*b7yffd=mya@i@9j#5%=*u7$@'
-DEBUG = True
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DEBUG = os.environ.get("DEBUG") == "True"
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
