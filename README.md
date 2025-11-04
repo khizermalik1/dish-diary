@@ -57,15 +57,15 @@ User registration form with validation and error handling.
 
 ### 🍳 Post a Recipe
 ![Post Recipe](screenshots/postrecipe.png)  
-Form to add a new recipe with image upload, ingredients, and method.
+Form to add a new recipe with title, summary, ingredients, and method.
 
 ### 📖 Recipe Detail
 ![Recipe Detail](screenshots/recipedetail.png)  
-Full view of a recipe including image, ingredients, method, and interaction buttons.
+Full view of a recipe including ingredients, method, and interaction buttons.
 
 ### 🧑‍💼 Edit Profile
 ![Edit Profile](screenshots/editprofile.png)  
-Allows users to update their personal details.
+Allows users to update their bio
 
 ### 💾 Saved Recipes
 ![Saved Recipes](screenshots/savedrecipepage.png)  
@@ -81,13 +81,12 @@ Confirmation prompt before deleting a recipe.
 
 ### ❤️ Likes & Comments
 ![Comment Likes](screenshots/commentlikes.png)  
-Displays likes on comments and recipe interactions.
+Displays likes and comments for recipe interactions.
 
 ![Comment Responses](screenshots/commentpageresponse.png)  
-Threaded responses to recipe comments.
 
 ![Like Responses](screenshots/likepageresponse.png)  
-Shows who liked a recipe and how users engage with content.
+Alert to show succesfully submitted a comment and a like
 
 ---
 
@@ -95,12 +94,12 @@ Shows who liked a recipe and how users engage with content.
 
 - As a new user, I want to register so I can create and save recipes.
 - As a returning user, I want to log in securely to access my content.
-- As a user, I want to post recipes with images so I can share my dishes.
+- As a user, I want to post recipes so I can share my dishes.
 - As a user, I want to edit or delete my recipes so I can manage my collection.
 - As a user, I want to browse and search recipes so I can discover new ideas.
 - As a user, I want to like and comment on recipes so I can interact with others.
 - As a user, I want to save recipes to my profile so I can revisit them later.
-- As a user, I want the site to work on mobile so I can use it while cooking.
+- As a user, I want the site to work on mobile so I can use it easily.
 
 ---
 
