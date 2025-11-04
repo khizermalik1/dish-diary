@@ -44,7 +44,7 @@ Below are screenshots taken from the deployed Dish-Diary app, showing key featur
 Displays featured recipes and navigation. Clean layout with category filters.
 
 ### 📱 Homepage (Mobile)
-![Homepage Mobile](screenshots/homepage-mobile.png)  
+![Homepage Mobile](screenshots/homepagemobile.png)  
 Responsive version of the homepage, optimized for mobile users.
 
 ### 🔐 Login Page
