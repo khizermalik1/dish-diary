@@ -102,6 +102,27 @@ Alert to show succesfully submitted a comment and a like
 - As a user, I want the site to work on mobile so I can use it easily.
 
 ---
+## 🗂️ Project Planning
+
+This project was managed using a GitHub Project Board to organize tasks and track progress. Tasks were prioritized using the **MoSCoW method**, which helped guide development from MVP to feature-rich experience. Project Board Link - https://github.com/users/khizermalik1/projects/6/views/1
+
+### MoSCoW Prioritization
+
+**Must Have**
+- User registration to create and save recipes  
+- Secure login for returning users  
+- Ability to post recipes with title, ingredients, and instructions  
+- Edit and delete recipes to manage personal collection  
+
+**Should Have**
+- Browse and search recipes by keyword or category  
+- Responsive design for mobile and tablet use  
+- Save recipes to user profile for later access  
+
+**Could Have**
+- Like and comment on recipes to encourage interaction and feedback  
+
+Each user story was mapped to specific tasks in the project board to ensure development stayed focused on user needs and goals.
 
 ## 🧪 Testing
 
