@@ -51,11 +51,11 @@
         {% for user in users %}
           <div class="col-md-4 mb-4">
             <div class="card shadow-sm p-3">
-              <h2 class="card-title">
+              <h5 class="card-title">
                 <a href="{% url 'recipes:user_profile' username=user.username %}" class="text-danger text-decoration-none">
                   {{ user.username }}
                 </a>
-              </h2>
+              </h5>
               <p class="card-text text-muted">
                 {{ user.profile.bio|default:"No bio yet." }}
               </p>
