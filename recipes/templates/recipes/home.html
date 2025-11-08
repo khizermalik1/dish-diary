@@ -171,9 +171,7 @@
                 <h3 class="card-title">{{ recipe.title }}</h3>
                 <p class="card-text">{{ recipe.summary|truncatewords:20 }}</p>
                 <p class="text-muted small mt-2">
-                  ❤️ {{ recipe.like_count }} like{{ recipe.like_count|pluralize
-                  }}, 💬 {{ recipe.comment_count }} comment{{
-                  recipe.comment_count|pluralize }}
+                  ❤️ {{ recipe.like_count }} like{{ recipe.like_count|pluralize}}, 💬 {{ recipe.comment_count }} comment{{recipe.comment_count|pluralize }}
                 </p>
               </div>
               <a
