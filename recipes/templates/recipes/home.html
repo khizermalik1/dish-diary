@@ -55,7 +55,7 @@
         background-color: #ffb997;
         border: none;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
+      {% comment %} }
       .card-title {
         color: #d35400;
         font-weight: 600;
@@ -66,8 +66,32 @@
       }
       .btn-outline-danger:hover {
         background-color: #d35400;
-        color: white;
+        color: white; {% endcomment %}
       }
+        .card-title {
+    color: #a80000; /* darker red for better contrast */
+  }
+
+  .btn-outline-danger {
+    border-color: #a80000;
+    color: #a80000;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #a80000;
+    color: white;
+  }
+
+  .text-muted {
+    color: #5c5c5c !important;
+  }
+
+  button:focus,
+  a:focus,
+  input:focus {
+    outline: 2px solid #d35400;
+    outline-offset: 2px;
+  }
     </style>
   </head>
   <body>
