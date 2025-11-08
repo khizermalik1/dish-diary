@@ -38,7 +38,7 @@
         border-radius: 16px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
-      h2 {
+      h1 {
         color: #d35400;
         font-weight: bold;
         text-align: center;
@@ -52,7 +52,7 @@
 
     <!-- Login Form -->
     <div class="form-container">
-      <h2>Login to DishDiary</h2>
+      <h1>Login to DishDiary</h1>
       <form method="post">
         {% csrf_token %} {{ form.as_p }}
         <button type="submit" class="btn btn-danger w-100">Login</button>

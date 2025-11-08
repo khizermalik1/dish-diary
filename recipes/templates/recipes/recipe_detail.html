@@ -36,7 +36,7 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
       h1,
-      h4 {
+      h2 {
         color: #d35400;
         font-weight: 700;
       }
@@ -84,10 +84,10 @@
           • {{ recipe.created_at|date:"F j, Y" }}
         </p>
 
-        <h4>Summary</h4>
+        <h2>Summary</h2>
         <p>{{ recipe.summary }}</p>
 
-        <h4>Ingredients</h4>
+        <h2>Ingredients</h2>
         <ul>
           {% for line in recipe.ingredients.splitlines %}
           <li>{{ line }}</li>
@@ -96,7 +96,7 @@
           {% endfor %}
         </ul>
 
-        <h4>Steps</h4>
+        <h2>Steps</h2>
         <ol>
           {% for line in recipe.steps.splitlines %}
           <li>{{ line }}</li>
@@ -138,9 +138,9 @@
         <div class="col-md-8">
           <div class="card shadow-sm border-0" style="background-color: #fff0e6;">
             <div class="card-body">
-              <h5 class="card-title text-center mb-4">💬 Comments & ❤️ Likes</h5>
+              <h3 class="card-title text-center mb-4">💬 Comments & ❤️ Likes</h3>
 
-              <h6 class="mb-3">Comments</h6>
+              <h4 class="mb-3">Comments</h4>
               <div style="max-height: 200px; overflow-y: auto;">
                 <ul class="list-group list-group-flush">
                   {% for comment in recipe.comments.all %}
