@@ -126,14 +126,19 @@ Each user story was mapped to specific tasks in the project board to ensure deve
 
 ## 🧪 Testing
 
-- Manual testing across Chrome, Firefox, Safari, and mobile browsers
+- Manual testing across Chrome, Firefox, Safari, and mobile browsers (Can be seen VIA Screenshots above of web app)
 - Form validation using Django’s built-in tools
 - CSRF protection enabled on all forms
-- CRUD operations tested for expected behavior
+- CRUD operations tested for expected behavior (Can be seen VIA Screenshots above of web app)
 - Authentication tested (register, login, logout)
 - Responsive layout verified using browser dev tools
+The Lighthouse audit shows a high-performing mobile experience - lighthousemobile.png
 
----
+Performance score: 96 Accessibility: 100 Best Practices: 100 SEO: 100
+
+## 🪞 Reflection
+This project was a deep dive into building a full-stack web application with performance, accessibility, and maintainability in mind. From setting up the backend with Django to deploying on Heroku, every step challenged me to think critically about structure, speed, and user experience. Going forward, I plan to replace inline styles with consistent, modular CSS to improve maintainability and scalability. Building this app helped me balance speed, structure, and usability.
+
 
 ## 📄 Credits
 
