@@ -132,7 +132,7 @@ Each user story was mapped to specific tasks in the project board to ensure deve
 - CRUD operations tested for expected behavior (Can be seen VIA Screenshots above of web app)
 - Authentication tested (register, login, logout)
 - Responsive layout verified using browser dev tools
-The Lighthouse audit shows a high-performing mobile experience - lighthousemobile.png
+The Lighthouse audit shows a high-performing mobile experience - (screenshots/lighthousemobile.png) 
 
 Performance score: 96 Accessibility: 100 Best Practices: 100 SEO: 100
 
