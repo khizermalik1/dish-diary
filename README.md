@@ -163,6 +163,34 @@ The diagram below illustrates the structure of Dish-Diary’s relational databas
 The Lighthouse audit shows a high-performing mobile experience  
 ![Lighthouse Mobile Audit](screenshots/lighthousemobile.png)
 
+### Manual Testing
+
+#### User Registration & Login
+- Registered a new user with valid credentials — ✅ successful
+- Tried registering with an existing email — ❌ error message displayed correctly
+- Logged in and logged out — ✅ working as expected
+
+#### Recipe Creation
+- Created a recipe with all required fields — ✅ recipe saved and displayed
+- Left required fields blank — ❌ form validation triggered
+- Uploaded an image — ✅ image displayed correctly
+
+#### Profile Editing
+- Edited profile bio and saved changes — ✅ updates reflected
+- Tried saving with empty bio — ❌ validation prevented submission
+
+#### Explore Chefs
+- Viewed other user profiles — ✅ links and data loaded correctly
+- Tried accessing profile without login — ❌ redirected to login page
+
+#### Saved Recipes
+- Saved a recipe — ✅ appeared in saved list
+- Removed a saved recipe — ✅ disappeared from list
+
+#### Delete Functionality
+- Deleted a recipe from the front end — ✅ confirmation shown, recipe removed
+
+
 ## 🪞 Reflection
 This project was a deep dive into building a full-stack web application with performance, accessibility, and maintainability in mind. From setting up the backend with Django to deploying on Heroku, every step challenged me to think critically about structure, speed, and user experience. Going forward, I plan to replace inline styles with consistent, modular CSS to improve maintainability and scalability. Building this app helped me balance speed, structure, and usability.
 
