@@ -135,9 +135,6 @@ Each user story was mapped to specific tasks in the project board to ensure deve
 The Lighthouse audit shows a high-performing mobile experience  
 ![Lighthouse Mobile Audit](screenshots/lighthousemobile.png)
 
-
-Performance score: 96 Accessibility: 100 Best Practices: 100 SEO: 100
-
 ## 🪞 Reflection
 This project was a deep dive into building a full-stack web application with performance, accessibility, and maintainability in mind. From setting up the backend with Django to deploying on Heroku, every step challenged me to think critically about structure, speed, and user experience. Going forward, I plan to replace inline styles with consistent, modular CSS to improve maintainability and scalability. Building this app helped me balance speed, structure, and usability.
 
