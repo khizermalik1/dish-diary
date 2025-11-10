@@ -159,7 +159,7 @@ The diagram below illustrates the structure of Dish-Diary’s relational databas
 - CRUD operations tested for expected behavior (Can be seen VIA Screenshots above of web app)
 - Authentication tested (register, login, logout)
 - Responsive layout verified using browser dev tools
-- Code Validation using W3C CSS and HTML Validation Service - Some HTML and CSS validation errors are caused by Django template syntax (e.g., `{% url %}`, `{{ variable }}`), which are not recognized.  
+- Code Validation using W3C CSS and HTML Validation Service - Some HTML and CSS validation errors are caused by Django template syntax which are not recognized.  
 The Lighthouse audit shows a high-performing mobile experience  
 ![Lighthouse Mobile Audit](screenshots/lighthousemobile.png)
 
