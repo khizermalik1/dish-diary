@@ -1,4 +1,4 @@
-# Dish-Diary 🍽️
+# Dish-Diary 🍽️ - Live Link - https://dish-diary-6fb544588f18.herokuapp.com/
 
 Dish-Diary is a full-stack Django web application that allows users to create, manage, and explore a personal collection of recipes. It supports secure user authentication, full CRUD functionality, and a responsive design optimized for both desktop and mobile devices. Users can interact with recipes by liking, commenting, and saving them to their profile.
 
@@ -124,6 +124,33 @@ This project was managed using a GitHub Project Board to organize tasks and trac
 
 Each user story was mapped to specific tasks in the project board to ensure development stayed focused on user needs and goals.
 
+## 🧬 Models Overview
+
+Dish-Diary uses Django’s ORM to define the following core models:
+
+- **User**: Built-in Django user model used for authentication and ownership of recipes, comments, likes, and favourites.
+- **Profile**: Extends the user with a bio field. One-to-one relationship with `User`.
+- **Recipe**: Stores recipe details including title, summary, ingredients and steps. Linked to `User` as author.
+- **Comment**: Allows users to leave comments on recipes. Linked to both `User` and `Recipe`.
+- **Like**: Tracks how many likes each recipe receives. Linked to `Recipe`
+- **Favourite**: Tracks recipes saved by users. Includes a uniqueness constraint to prevent duplicate saves. Link to both `User` and `Recipe`.
+
+ ## 🧬 Entity Relationship Diagram (ERD)
+
+The diagram below illustrates the structure of Dish-Diary’s relational database. It shows how users interact with recipes through likes, favourites, and comments, and how each model connects to others via foreign keys.
+
+- **User ↔ Profile**: One-to-One  
+- **User ↔ Recipe**: One-to-Many (author)  
+- **User ↔ Comment**: One-to-Many  
+- **User ↔ Favourite**: Many-to-Many via ForeignKey  
+- **Recipe ↔ Comment**: One-to-Many  
+- **Recipe ↔ Like**: One-to-Many  
+- **Recipe ↔ Favourite**: One-to-Many  
+
+![ERD](screenshots/erd.png)
+
+
+
 ## 🧪 Testing
 
 - Manual testing across Chrome, Firefox, Safari, and mobile browsers (Can be seen VIA Screenshots above of web app)
@@ -132,6 +159,7 @@ Each user story was mapped to specific tasks in the project board to ensure deve
 - CRUD operations tested for expected behavior (Can be seen VIA Screenshots above of web app)
 - Authentication tested (register, login, logout)
 - Responsive layout verified using browser dev tools
+- Code Validation using W3C CSS and HTML Validation Service - Some HTML and CSS validation errors are caused by Django template syntax which are not recognized.  
 The Lighthouse audit shows a high-performing mobile experience  
 ![Lighthouse Mobile Audit](screenshots/lighthousemobile.png)
 
