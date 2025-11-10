@@ -21,14 +21,14 @@
 </style>
 
 </head>
- {% include 'recipes/navbar.html' %}
 <body style="background-color: #ffe5d9; font-family: Georgia, serif;">
+   {% include 'recipes/navbar.html' %}
   <div class="container mt-5">
-    <h1 class="mb-4">Edit Your Profile</h2>
+    <h1 class="mb-4">Edit Your Profile</h1>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="mb-3">
-        <label for="id_bio" class="form-label">Bio</label>
+        <label class="form-label">Bio</label>
         {{ form.bio }}
       </div>
       
