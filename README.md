@@ -124,6 +124,157 @@ This project was managed using a GitHub Project Board to organize tasks and trac
 
 Each user story was mapped to specific tasks in the project board to ensure development stayed focused on user needs and goals.
 
+
+## 🧬 Design Documentation
+
+Dish-Diary uses a warm, cookbook-inspired visual style designed to feel welcoming and familiar. The interface focuses on readability, soft colours, and clear structure so users can comfortably browse, create, and manage recipes on any device. A mobile-first approach was used to ensure that users can access recipes easily while cooking, with layouts that adapt cleanly between desktop and smaller screens.
+
+## Wireframes
+
+Wireframes were created during the planning phase to outline the structure and layout of the key pages in Dish‑Diary. These wireframes helped guide the visual hierarchy, user flow, and responsive behaviour across desktop and mobile devices.
+
+The following pages were planned using simple conceptual wireframes:
+
+### Homepage
+- Hero banner with background image  
+- Navigation bar at the top  
+- Search bar below the hero  
+- “Post a Recipe” button for authenticated users  
+- Sections for Most Popular Recipes and Latest Recipes  
+- Card‑based layout for recipe previews  
+
+### Recipe Detail Page
+- Large recipe image  
+- Title, author, and interaction buttons (like, save, comment)  
+- Ingredients and method displayed clearly  
+- Comment section at the bottom  
+
+### Create & Edit Recipe Pages
+- Form layout with fields for title, summary, ingredients and method.
+- Submit and cancel buttons  
+- Validation messages for required fields  
+
+### User Profile Page
+- User bio at the top  
+- Sections for saved recipes and user‑created recipes  
+- Card‑based layout for recipe previews  
+
+### Authentication Pages (Login & Signup)
+- Centered form layout  
+- Clear labels and validation feedback  
+- Minimal distractions to keep focus on authentication  
+
+Below this section, a wireframe is presented as text‑based ASCII diagram to illustrate the planned structure of each page.
+
+### Homepage Wireframe
+
+<pre>
++--------------------------------------------------------------+
+|                          NAVBAR                              |
+|--------------------------------------------------------------|
+|  [DishDiary Logo]   [Home] [Explore Chefs] [Saved] [Login]   |
++--------------------------------------------------------------+
+
++--------------------------------------------------------------+
+|                           HERO                               |
+|--------------------------------------------------------------|
+|  [ Background Image (heroimage.webp) ]                       |
+|                                                              |
+|                 Welcome to DishDiary                         |
+|     Cook, share, and discover recipes that bring joy         |
+|                     to your kitchen.                         |
++--------------------------------------------------------------+
+
++--------------------------------------------------------------+
+|                        SEARCH BAR                            |
+|--------------------------------------------------------------|
+|  [ Search Input Field ]   [ Search Button ]                  |
++--------------------------------------------------------------+
+
++--------------------------------------------------------------+
+|                    POST A RECIPE BUTTON                      |
+|--------------------------------------------------------------|
+|                     [ Post a Recipe ]                        |
++--------------------------------------------------------------+
+
++--------------------------------------------------------------+
+|                   MOST POPULAR RECIPES                       |
+|--------------------------------------------------------------|
+|  [Card]   [Card]   [Card]   [Card]                           |
+|  Title    Title    Title    Title                            |
+|  Summary  Summary  Summary  Summary                          |
+|  ❤️ Likes 💬 Comments                                        |
+|  [View Recipe]                                               |
++--------------------------------------------------------------+
+
++--------------------------------------------------------------+
+|                     LATEST RECIPES                           |
+|--------------------------------------------------------------|
+|  [Card]   [Card]   [Card]                                    |
+|  Title    Title    Title                                     |
+|  Summary  Summary  Summary                                   |
+|  ❤️ Likes 💬 Comments                                        |
+|  [View Recipe] [Edit] [Delete] (if owner)                    |
++--------------------------------------------------------------+
+</pre>
+
+
+## Colour Palette
+
+Dish‑Diary uses a warm, food‑inspired colour palette designed to create a welcoming and homely feel. The colours were chosen to reflect the comfort of cooking while maintaining strong readability and visual consistency across the site.
+
+| Purpose | Colour | Hex |
+|--------|--------|------|
+| **Main Background** | Soft Peach | `#ffe5d9` |
+| **Navbar Background** | Light Peach | `#fff0e6` |
+| **Navbar Border** | Warm Coral | `#ffb997` |
+| **Primary Accent (Brand, Buttons, Links)** | Deep Orange | `#d35400` |
+| **Primary Accent Hover** | Dark Orange | `#a84300` |
+| **Card Background** | Peach Coral | `#ffb997` |
+| **Card Title** | Deep Red | `#a80000` |
+| **Text Colour** | Charcoal Grey | `#3e3e3e` |
+| **Focus Outline** | Deep Orange | `#d35400` |
+
+### Why these colours were chosen
+- Warm peach tones create a **friendly, inviting cooking atmosphere**  
+- Deep orange accents highlight interactive elements and brand identity  
+- Charcoal grey text ensures **excellent readability**  
+- The palette is consistent across all components, improving UX  
+
+## Typography
+
+Dish‑Diary uses a single primary typeface across the entire site to maintain a consistent and readable visual style.
+
+### Primary Font: Georgia
+The project uses the `Georgia` serif typeface for all text elements, including:
+
+- Body text (set globally on the `body` element)
+- Navigation links (`.nav-link`)
+- Headings and hero text
+- Buttons and card content (inherited)
+
+### Font Styling in the Interface
+- **Hero Heading (`.hero h1`)**  
+  Large font size (`3rem`) and bold weight (`700`) to create a strong visual impact.
+
+- **Hero Subheading (`.hero p`)**  
+  Slightly larger than standard text (`1.2rem`) for readability over the hero image.
+
+- **Navigation Links (`.nav-link`)**  
+  Styled with `font-weight: 600` to make them stand out while remaining consistent with the Georgia typeface.
+
+Overall, the typography is intentionally simple, relying on a single serif font with variations in size and weight to create hierarchy and clarity.
+
+## Design Rationale
+
+The design choices for Dish‑Diary were made to create a warm, welcoming, and easy‑to‑use recipe platform. The warm peach and coral tones were selected to reflect the comfort and homeliness associated with cooking. These colours also provide strong contrast for text and interactive elements, improving readability and accessibility.
+
+The Georgia serif typeface was chosen for its classic, cookbook‑style appearance, giving the site a friendly and familiar feel. Using a single font across the project keeps the interface consistent and uncluttered.
+
+The layout is built using Bootstrap’s grid system, ensuring clean spacing, responsive behaviour, and a familiar structure for users. Elements such as cards, buttons, and the hero section were styled to be visually clear and intuitive, helping users browse, read, and create recipes without distraction.
+
+
+
 ## 🧬 Models Overview
 
 Dish-Diary uses Django’s ORM to define the following core models:
