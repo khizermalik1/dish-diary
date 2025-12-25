@@ -5,4 +5,4 @@ os.environ.setdefault(
 )
 os.environ.setdefault(
     "SECRET_KEY", "&7k4@1(-b4433s!n%pf9wzg9r*b7yffd=mya@i@9j#5%=*u7$@")
-os.environ.setdefault("DEBUG", "True")
+os.environ.setdefault("DEBUG", "False")

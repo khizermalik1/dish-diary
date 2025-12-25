@@ -28,10 +28,46 @@ Dish-Diary is a full-stack Django web application that allows users to create, m
 
 ---
 
-## 🚀 Deployment
+## 🚀 Deployment Process
 
-Dish-Diary is deployed on Heroku using a PostgreSQL database.  
-Sensitive configuration values such as `SECRET_KEY`, `DEBUG`, and `DATABASE_URL` are stored securely in Heroku Config Vars and excluded from version control.
+Dish‑Diary was deployed using **Heroku**, with the project code stored on **GitHub**.  
+Below is the exact deployment process followed for this project.
+
+### 1. Preparing the Project
+- The full project was pushed to a GitHub repository.
+- An `env.py` file was created locally to store sensitive values such as:
+  - `SECRET_KEY`
+  - `DATABASE_URL`
+- These values were added to `.gitignore` so they are not committed to GitHub.
+
+### 2. Creating the Heroku App
+- Logged into Heroku and created a new application.
+- Selected the region closest to the target audience.
+
+### 3. Adding Environment Variables
+In the Heroku dashboard:
+- Opened **Settings → Config Vars**.
+- Added the environment variables found in env.py :
+  - `SECRET_KEY`
+  - `DATABASE_URL`  
+- These values allow Django to run securely on Heroku.
+
+### 4. Connecting Heroku to GitHub
+- Navigated to the **Deploy** tab.
+- Selected **GitHub** as the deployment method.
+- Connected Heroku to the GitHub account.
+- Searched for and selected the Dish‑Diary repository.
+
+### 5. Deploying the Application
+- Selected the `main` branch.
+- Used **Manual Deploy** to trigger the first build.
+- Heroku installed the project dependencies and built the Django application.
+
+### 6. Final Deployment
+- Once the build completed successfully, Heroku released the app.
+- The live version of Dish‑Diary became available through the link at the top of this README.
+
+This process ensures the project is deployed securely, with all sensitive information stored in Heroku’s environment settings rather than the public repository.
 
 ---
 
@@ -164,9 +200,11 @@ The following pages were planned using simple conceptual wireframes:
 - Clear labels and validation feedback  
 - Minimal distractions to keep focus on authentication  
 
-Below this section, a wireframe is presented as text‑based ASCII diagram to illustrate the planned structure of each page.
+Below this section, wireframes are presented as text‑based ASCII diagram to illustrate the planned structure of pages.
 
 ### Homepage Wireframe
+
+During the planning stage, this desktop wireframe was created to map out the overall structure of the Homepage, helping define the visual hierarchy, layout, and key user interactions for larger screen sizes.
 
 <pre>
 +--------------------------------------------------------------+
@@ -217,6 +255,63 @@ Below this section, a wireframe is presented as text‑based ASCII diagram to il
 |  [View Recipe] [Edit] [Delete] (if owner)                    |
 +--------------------------------------------------------------+
 </pre>
+
+### Recipe Detail Wireframe
+
+As part of the initial design planning, this mobile wireframe illustrates the intended responsive layout for the Recipe Detail page on handheld devices.
+
+<pre>
++--------------------------------------+
+|               NAVBAR                 |
+|--------------------------------------|
+| [Logo]        DishDiary        [≡]   |
++--------------------------------------+
+
++--------------------------------------+
+|           RECIPE IMAGE               |
+|   [   heroimage.webp (mobile)   ]    |
++--------------------------------------+
+
++--------------------------------------+
+|             RECIPE TITLE             |
+|   "Creamy Chicken Alfredo"           |
+|   by @username                       |
++--------------------------------------+
+
++--------------------------------------+
+|          INTERACTION BUTTONS         |
+|  ❤️ 123   💬 8   🔖 Save             |
++--------------------------------------+
+
++--------------------------------------+
+|              INGREDIENTS             |
+|  • 200g pasta                        |
+|  • 1 cup cream                       |
+|  • 1 tbsp butter                     |
+|  • Salt, pepper                      |
++--------------------------------------+
+
++--------------------------------------+
+|                METHOD                |
+|  1. Boil pasta                       |
+|  2. Cook sauce                       |
+|  3. Combine and serve                |
++--------------------------------------+
+
++--------------------------------------+
+|             COMMENTS (MOBILE)        |
+|  @user1: Looks amazing!              |
+|  @user2: Tried it, loved it!         |
+|                                      |
+|  [ Add a Comment Input Field ]       |
+|  [  Post Comment Button  ]           |
++--------------------------------------+
+</pre>
+
+The following image wireframes were created during the planning phase to illustrate how the DishDiary homepage layout would adapt across tablet and mobile screen sizes, ensuring a responsive and user-friendly experience on different devices.
+
+![Homepage Wireframe](screenshots/homepagewireframe.png)
+
 
 
 ## Colour Palette
