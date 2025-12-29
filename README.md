@@ -28,46 +28,6 @@ Dish-Diary is a full-stack Django web application that allows users to create, m
 
 ---
 
-## 🚀 Deployment Process
-
-Dish‑Diary was deployed using **Heroku**, with the project code stored on **GitHub**.  
-Below is the exact deployment process followed for this project.
-
-### 1. Preparing the Project
-- The full project was pushed to a GitHub repository.
-- An `env.py` file was created locally to store sensitive values such as:
-  - `SECRET_KEY`
-  - `DATABASE_URL`
-- These values were added to `.gitignore` so they are not committed to GitHub.
-
-### 2. Creating the Heroku App
-- Logged into Heroku and created a new application.
-- Selected the region closest to the target audience.
-
-### 3. Adding Environment Variables
-In the Heroku dashboard:
-- Opened **Settings → Config Vars**.
-- Added the environment variables found in env.py :
-  - `SECRET_KEY`
-  - `DATABASE_URL`  
-- These values allow Django to run securely on Heroku.
-
-### 4. Connecting Heroku to GitHub
-- Navigated to the **Deploy** tab.
-- Selected **GitHub** as the deployment method.
-- Connected Heroku to the GitHub account.
-- Searched for and selected the Dish‑Diary repository.
-
-### 5. Deploying the Application
-- Selected the `main` branch.
-- Used **Manual Deploy** to trigger the first build.
-- Heroku installed the project dependencies and built the Django application.
-
-### 6. Final Deployment
-- Once the build completed successfully, Heroku released the app.
-- The live version of Dish‑Diary became available through the link at the top of this README.
-
-This process ensures the project is deployed securely, with all sensitive information stored in Heroku’s environment settings rather than the public repository.
 
 ---
 
@@ -126,6 +86,9 @@ Alert to show succesfully submitted a comment and a like
 
 ---
 
+# LO1 — Using Agile to Plan & Design the Application
+
+
 ## 👥 User Stories
 
 - As a new user, I want to register so I can create and save recipes.
@@ -136,6 +99,44 @@ Alert to show succesfully submitted a comment and a like
 - As a user, I want to like and comment on recipes so I can interact with others.
 - As a user, I want to save recipes to my profile so I can revisit them later.
 - As a user, I want the site to work on mobile so I can use it easily.
+
+## ✔️ Acceptance Criteria (LO1)
+
+### Register an account
+- **Given** I am on the signup page  
+- **When** I submit valid details  
+- **Then** my account is created and I am logged in  
+
+### Create a recipe
+- **Given** I am logged in  
+- **When** I submit a valid recipe form  
+- **Then** the recipe is created and a success message appears  
+
+### Edit a recipe
+- **Given** I am the recipe owner  
+- **When** I update the recipe  
+- **Then** the changes are saved and confirmed  
+
+### Delete a recipe
+- **Given** I am the recipe owner  
+- **When** I confirm deletion  
+- **Then** the recipe is removed and a success message appears  
+
+### Save a recipe
+- **Given** I am logged in  
+- **When** I click “Save”  
+- **Then** the recipe appears in my saved list  
+
+### Like a recipe
+- **Given** I am logged in  
+- **When** I click the like button  
+- **Then** the like count updates immediately  
+
+### Comment on a recipe
+- **Given** I am logged in  
+- **When** I submit a comment  
+- **Then** it appears instantly under the recipe  
+
 
 ---
 ## 🗂️ Project Planning
@@ -159,6 +160,24 @@ This project was managed using a GitHub Project Board to organize tasks and trac
 - Like and comment on recipes to encourage interaction and feedback  
 
 Each user story was mapped to specific tasks in the project board to ensure development stayed focused on user needs and goals.
+
+## ✔️ Epics & Milestones (LO1)
+
+### Epics
+1. Authentication & Profiles  
+2. Recipe Management (CRUD)  
+3. Search & Discovery  
+4. Social Interactions (Likes, Comments, Saves)  
+5. UI/UX & Responsive Design  
+6. Deployment & Security  
+
+### Milestones
+- **Authentication MVP** → signup, login, logout  
+- **Recipe CRUD** → create, edit, delete, image upload  
+- **Social Features** → likes, comments, saved recipes  
+- **Search & Filters** → keyword search, category filtering  
+- **UI/UX Polish** → responsive layout, colour palette, typography  
+- **Deployment** → Heroku setup, config vars, static files  
 
 
 ## 🧬 Design Documentation
@@ -369,8 +388,9 @@ The Georgia serif typeface was chosen for its classic, cookbook‑style appearan
 The layout is built using Bootstrap’s grid system, ensuring clean spacing, responsive behaviour, and a familiar structure for users. Elements such as cards, buttons, and the hero section were styled to be visually clear and intuitive, helping users browse, read, and create recipes without distraction.
 
 
+# LO2 — Data Model & CRUD Functionality
 
-## 🧬 Models Overview
+ ## 🧬 Models Overview
 
 Dish-Diary uses Django’s ORM to define the following core models:
 
@@ -380,6 +400,18 @@ Dish-Diary uses Django’s ORM to define the following core models:
 - **Comment**: Allows users to leave comments on recipes. Linked to both `User` and `Recipe`.
 - **Like**: Tracks how many likes each recipe receives. Linked to `Recipe`
 - **Favourite**: Tracks recipes saved by users. Includes a uniqueness constraint to prevent duplicate saves. Link to both `User` and `Recipe`.
+
+## CRUD Functionality
+
+Dish‑Diary implements full CRUD operations across its core models:
+
+- **Create**: Users can create recipes, comments, likes, and favourites.
+- **Read**: Recipes, profiles, and interactions are displayed through templates and views.
+- **Update**: Users can edit their own recipes and profile information.
+- **Delete**: Users can delete their own recipes, comments, and saved recipes.
+
+These operations are handled through Django views, forms, and model methods, ensuring secure and consistent data handling.
+
 
  ## 🧬 Entity Relationship Diagram (ERD)
 
@@ -395,6 +427,48 @@ The diagram below illustrates the structure of Dish-Diary’s relational databas
 
 ![ERD](screenshots/erd.png)
 
+
+# LO3 — Authentication, Authorisation & Permissions
+
+Dish‑Diary uses Django’s built‑in authentication system to ensure secure access and role‑based permissions throughout the application.
+
+## 3.1 User Registration & Login
+- Users can register with a unique username, email, and password.
+- Django’s authentication system handles secure login and logout.
+- Form validation prevents invalid or duplicate accounts.
+- Passwords are hashed and never stored in plain text.
+
+## 3.2 Access Control
+The application restricts access to certain features based on authentication state:
+
+- Only logged‑in users can:
+  - Create recipes
+  - Edit their own recipes
+  - Delete their own recipes
+  - Save recipes
+  - Like recipes
+  - Comment on recipes
+  - Edit their profile
+
+- Anonymous users can:
+  - Browse recipes
+  - View recipe details
+  - Use search
+
+Attempting to access restricted pages redirects the user to the login page.
+
+## 3.3 Ownership Permissions
+Dish‑Diary enforces strict ownership rules:
+
+- Users can only edit or delete **their own** recipes.
+- Users can only edit or delete **their own** comments.
+- Saved recipes and likes are tied to the authenticated user.
+
+These rules ensure that users cannot modify or remove content created by others.
+
+
+
+# LO4 — Testing
 
 
 ## 🧪 Testing
@@ -447,8 +521,111 @@ This project was a deep dive into building a full-stack web application with per
 - Hosted on Heroku  
 - Database powered by PostgreSQL
 
+
+# LO5 — Version Control & Secure Code Management
+
+## 5.1 Version Control with Git & GitHub
+Git and GitHub were used throughout the project for version control.  
+The commit history shows regular commits documenting progress, bug fixes, and feature development.
+
+## 5.2 Secure Code Management
+To ensure security:
+
+- `env.py` has been **removed** from the repository  
+- `env.py` has been added to **.gitignore**  
+- All sensitive values (`SECRET_KEY`, `DATABASE_URL`, etc.) are stored in **Heroku Config Vars**  
+- No passwords, API keys, or secrets exist in the committed code  
+- The deployed version runs with **DEBUG = False**  
+
+This ensures the project meets security requirements for deployment.
+
+
+# LO6 — Deployment
+
+
+## 🚀 Deployment Process
+
+Dish‑Diary was deployed using **Heroku**, with the project code stored on **GitHub**.  
+Below is the exact deployment process followed for this project.
+
+### 1. Preparing the Project
+- The full project was pushed to a GitHub repository.
+- An `env.py` file was created locally to store sensitive values such as:
+  - `SECRET_KEY`
+  - `DATABASE_URL`
+- These values were added to `.gitignore` so they are not committed to GitHub.
+
+### 2. Creating the Heroku App
+- Logged into Heroku and created a new application.
+- Selected the region closest to the target audience.
+
+### 3. Adding Environment Variables
+In the Heroku dashboard:
+- Opened **Settings → Config Vars**.
+- Added the environment variables found in env.py :
+  - `SECRET_KEY`
+  - `DATABASE_URL`  
+- These values allow Django to run securely on Heroku.
+
+### 4. Connecting Heroku to GitHub
+- Navigated to the **Deploy** tab.
+- Selected **GitHub** as the deployment method.
+- Connected Heroku to the GitHub account.
+- Searched for and selected the Dish‑Diary repository.
+
+### 5. Deploying the Application
+- Selected the `main` branch.
+- Used **Manual Deploy** to trigger the first build.
+- Heroku installed the project dependencies and built the Django application.
+
+### 6. Final Deployment
+- Once the build completed successfully, Heroku released the app.
+- The live version of Dish‑Diary became available through the link at the top of this README.
+
+This process ensures the project is deployed securely, with all sensitive information stored in Heroku’s environment settings rather than the public repository.
+  
+
+# LO7 — Custom Data Model
+
+Dish‑Diary’s data model was designed specifically for this project and extends Django’s default User model with additional relationships:
+
+- Profile adds a bio field via a one‑to‑one relationship with User.
+- Recipe connects users to their content and links to likes, comments, and favourites.
+- Favourite enforces uniqueness so a user cannot save the same recipe twice.
+
+These decisions support the core social and recipe‑management features shown in the ERD above.
+
+
+
+
 ---
+# LO8 — AI Usage in Development
 
 ## 🤖 AI Assistance
 
-This project was developed with support from Microsoft Copilot for setup, configuration, and documentation.
+
+## 8.1 AI for Code Generation
+AI tools (Microsoft Copilot) were used to assist with:
+- generating boilerplate Django code (views, forms, template structure)
+- suggesting improvements to repetitive logic
+- producing example snippets that were manually reviewed and edited
+
+## 8.2 AI for Debugging
+AI was used to:
+- interpret Django error messages
+- troubleshoot migration issues
+- clarify deployment errors during Heroku setup
+
+## 8.3 AI for UX & Performance Improvements
+AI helped refine:
+- the colour palette while keeping WCAG contrast rules
+- layout spacing and responsive behaviour
+- ideas for improving user flow on recipe pages
+
+## 8.4 AI for Workflow Support
+AI was used as a planning assistant to:
+- break down tasks into smaller steps
+- draft documentation sections
+- validate reasoning during development
+
+All AI‑generated suggestions were manually reviewed and adapted to fit the project.
